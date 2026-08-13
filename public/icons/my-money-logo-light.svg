@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <!-- Icon mark: coin with dollar sign (white for blue BG) -->
+  <circle cx="24" cy="24" r="22" fill="#FFFFFF"/>
+  <circle cx="24" cy="24" r="18" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" stroke-opacity="0.2"/>
+  <path d="M24 12v2m0 20v2" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+  <path d="M20 30c0 1.657 1.79 3 4 3s4-1.343 4-3-1.79-3-4-3-4-1.343-4-3 1.79-3 4-3 4 1.343 4 3" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wordmark (white for blue BG) -->
+  <text x="56" y="33" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="600" fill="#FFFFFF" letter-spacing="-0.025em">My Money</text>
+</svg>

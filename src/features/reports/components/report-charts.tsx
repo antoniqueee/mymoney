@@ -1,0 +1,19 @@
+"use client";
+
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
+import { BarChart3 } from "lucide-react";
+import { formatCurrency } from "@/lib/formatters/currency";
+import { moneyToCents } from "@/lib/money";
+import type { ReportCategoryPoint, ReportTrendPoint } from "../types";
+import { chartStyles } from "@/config/theme";
+import { brandConfig } from "@/config/brand";
+
+const chartNumber = (value: string) => Number(moneyToCents(value)) / 100;
+
+export function ReportCharts({ trend, categories, currency }: { trend: ReportTrendPoint[]; categories: ReportCategoryPoint[]; currency: string }) {
+  const trendData = trend.map((point) => ({ ...point, label: new Intl.DateTimeFormat(brandConfig.locale, { month: "short", year: "2-digit", timeZone: "UTC" }).format(new Date(`${point.month}-01T00:00:00Z`)), incomeValue: chartNumber(point.income), expenseValue: chartNumber(point.expense) }));
+  const categoryData = categories.slice(0, 8).map((point) => ({ ...point, value: chartNumber(point.total) }));
+  return <div className="grid gap-5 xl:grid-cols-2"><Card><CardHeader><CardTitle>Tren arus kas</CardTitle><p className="text-sm text-muted-foreground">Pemasukan dan pengeluaran per bulan.</p></CardHeader><CardContent>{trendData.length === 0 ? <EmptyState compact icon={BarChart3} title="Belum ada tren" description="Perluas rentang tanggal atau tambahkan transaksi." /> : <div className="h-72" role="img" aria-label={`Grafik tren arus kas untuk ${trendData.length} bulan`}><ResponsiveContainer width="100%" height="100%"><BarChart accessibilityLayer data={trendData} margin={{ left: -16, right: 4 }}><CartesianGrid stroke={chartStyles.grid} strokeDasharray="4 4" vertical={false} /><XAxis dataKey="label" stroke={chartStyles.axis} tickLine={false} axisLine={false} fontSize={12} /><YAxis stroke={chartStyles.axis} tickLine={false} axisLine={false} fontSize={11} tickFormatter={(value: number) => new Intl.NumberFormat(brandConfig.locale, { notation: "compact" }).format(value)} /><Tooltip formatter={(_value, name, item) => { const row = item.payload as (typeof trendData)[number]; return [formatCurrency(name === "Pemasukan" ? row.income : row.expense, currency), name]; }} contentStyle={{ ...chartStyles.tooltip }} /><Bar dataKey="incomeValue" name="Pemasukan" fill={chartStyles.income} radius={[5, 5, 0, 0]} /><Bar dataKey="expenseValue" name="Pengeluaran" fill={chartStyles.expense} radius={[5, 5, 0, 0]} /></BarChart></ResponsiveContainer></div>}</CardContent></Card><Card><CardHeader><CardTitle>Peringkat kategori</CardTitle><p className="text-sm text-muted-foreground">Kategori pengeluaran terbesar dalam periode.</p></CardHeader><CardContent>{categoryData.length === 0 ? <EmptyState compact icon={BarChart3} title="Belum ada pengeluaran" description="Kategori akan diurutkan setelah ada pengeluaran." /> : <ol className="space-y-4">{categoryData.map((item, index) => <li key={item.category_id} className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-3"><span className="text-sm font-bold text-muted-foreground">{index + 1}</span><div className="min-w-0"><div className="flex items-center gap-2"><span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: item.color }} /><span className="truncate text-sm font-medium">{item.name}</span></div><div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full" style={{ width: `${Math.max(4, (item.value / categoryData[0].value) * 100)}%`, backgroundColor: item.color }} /></div></div><span className="text-sm font-bold tabular-nums">{formatCurrency(item.total, currency)}</span></li>)}</ol>}</CardContent></Card></div>;
+}

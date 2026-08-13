@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="inner-shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <!-- Background shape: Smooth rounded squircle with gradient (transparent outside) -->
+  <rect x="2" y="2" width="60" height="60" rx="18" fill="url(#brand-grad)"/>
+  <rect x="3" y="3" width="58" height="58" rx="17" stroke="url(#inner-shine)" stroke-width="2"/>
+
+  <!-- Sleek Wallet & Financial Trend Icon (White Vector) -->
+  <path d="M16 26C16 22.6863 18.6863 20 22 20H42C45.3137 20 48 22.6863 48 26V38C48 41.3137 45.3137 44 42 44H22C18.6863 44 16 41.3137 16 38V26Z" stroke="#FFFFFF" stroke-width="2.75" stroke-linejoin="round"/>
+  
+  <!-- Wallet Flap & Clasp -->
+  <path d="M35 28H48V36H35C32.7909 36 31 34.2091 31 32C31 29.7909 32.7909 28 35 28Z" fill="#FFFFFF" fill-opacity="0.95"/>
+  <circle cx="37.5" cy="32" r="2" fill="#1D4ED8"/>
+
+  <!-- Growth Spark / Arrow Accent -->
+  <path d="M22 17.5L28 17.5L28 23.5" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M28 17.5L20 25.5" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
