@@ -2,11 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 
 import { brandConfig } from "@/config/brand";
+import { getApplicationOrigin } from "@/features/auth/redirects";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://money.antonique.web.id"),
+  metadataBase: new URL(getApplicationOrigin("https://money.antonique.web.id")),
   title: {
     default: `${brandConfig.name} — Keuangan pribadi, lebih jernih`,
     template: `%s | ${brandConfig.name}`,
