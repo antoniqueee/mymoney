@@ -11,7 +11,7 @@ const mobileNavigation = allNavigation.filter((item) => item.mobile);
 export function MobileNav() {
   const pathname = usePathname();
   return (
-    <nav aria-label="Navigasi bawah" className="safe-bottom fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-t border-border bg-surface/95 px-1 pt-1 backdrop-blur-xl md:hidden">
+    <nav aria-label="Navigasi bawah" className="safe-bottom fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-t border-border bg-surface/95 px-1 pt-1 backdrop-blur-xl lg:hidden">
       {mobileNavigation.map((item) => {
         const active = isNavigationActive(pathname, item.href);
         const Icon = item.icon;
