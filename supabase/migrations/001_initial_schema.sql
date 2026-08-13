@@ -13,10 +13,12 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 -- Enable RLS on Profiles
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view their own profile" ON public.profiles;
 CREATE POLICY "Users can view their own profile" 
     ON public.profiles FOR SELECT 
     USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Users can update their own profile" ON public.profiles;
 CREATE POLICY "Users can update their own profile" 
     ON public.profiles FOR UPDATE 
     USING (auth.uid() = id);
@@ -35,6 +37,7 @@ CREATE TABLE IF NOT EXISTS public.categories (
 -- Enable RLS on Categories
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can CRUD their own categories" ON public.categories;
 CREATE POLICY "Users can CRUD their own categories" 
     ON public.categories FOR ALL 
     USING (auth.uid() = user_id);
@@ -54,6 +57,7 @@ CREATE TABLE IF NOT EXISTS public.transactions (
 -- Enable RLS on Transactions
 ALTER TABLE public.transactions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can CRUD their own transactions" ON public.transactions;
 CREATE POLICY "Users can CRUD their own transactions" 
     ON public.transactions FOR ALL 
     USING (auth.uid() = user_id);
@@ -73,6 +77,7 @@ CREATE TABLE IF NOT EXISTS public.budgets (
 -- Enable RLS on Budgets
 ALTER TABLE public.budgets ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can CRUD their own budgets" ON public.budgets;
 CREATE POLICY "Users can CRUD their own budgets" 
     ON public.budgets FOR ALL 
     USING (auth.uid() = user_id);
