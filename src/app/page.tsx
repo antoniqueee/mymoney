@@ -8,9 +8,9 @@ import { brandConfig } from "@/config/brand";
 import { createClient } from "@/lib/supabase/server";
 
 const benefits = [
-  { icon: ReceiptText, title: "Pencatatan yang ringan", description: "Catat pemasukan dan pengeluaran tanpa alur yang berbelit." },
-  { icon: BarChart3, title: "Gambaran yang jernih", description: "Pahami arus kas, kategori belanja, dan kemajuan anggaran dalam satu tempat." },
-  { icon: LockKeyhole, title: "Privasi sebagai fondasi", description: "Data keuangan dilindungi autentikasi dan aturan akses per pengguna." },
+  { icon: ReceiptText, title: "Catat tanpa ribet", description: "Simpan pemasukan dan pengeluaran sehari-hari dalam beberapa langkah." },
+  { icon: BarChart3, title: "Mudah dilihat kembali", description: "Lihat arus kas, kebiasaan belanja, dan kemajuan anggaran dalam satu tempat." },
+  { icon: LockKeyhole, title: "Data tetap milik Anda", description: "Catatan keuangan Anda terlindungi dan hanya dapat diakses oleh Anda." },
 ] as const;
 
 export default async function LandingPage() {
@@ -32,18 +32,18 @@ export default async function LandingPage() {
         <section className="relative mx-auto grid max-w-[90rem] gap-12 px-app-gutter pb-20 pt-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pb-28 lg:pt-24">
           <div className="pointer-events-none absolute -right-36 -top-40 size-[34rem] rounded-full bg-primary/10 blur-3xl" />
           <div className="relative max-w-3xl animate-fade-up">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary-soft px-3 py-1.5 text-xs font-semibold text-primary"><LockKeyhole aria-hidden="true" className="size-3.5" />Keuangan pribadi, tetap pribadi</p>
-            <h1 className="font-brand text-display font-semibold text-navy">Uang Anda,<br /><span className="text-primary">lebih mudah dipahami.</span></h1>
-            <p className="mt-7 max-w-2xl text-lead text-muted-foreground">My Money membantu Anda mencatat keseharian, melihat pola, dan membuat keputusan finansial dengan lebih tenang—tanpa kerumitan yang tidak perlu.</p>
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary-soft px-3 py-1.5 text-xs font-semibold text-primary"><LockKeyhole aria-hidden="true" className="size-3.5" />Teman sederhana untuk keuangan sehari-hari</p>
+            <h1 className="font-brand text-display font-semibold text-navy">Kenali uang Anda,<br /><span className="text-primary">tanpa bikin pusing.</span></h1>
+            <p className="mt-7 max-w-2xl text-lead text-muted-foreground">Catat pemasukan dan pengeluaran, pantau kebiasaan, lalu susun rencana keuangan dari satu tempat yang nyaman.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="w-full sm:w-auto"><Link href={destination}>{user ? "Lanjut ke dashboard" : "Mulai dengan Google"}<ArrowRight aria-hidden="true" /></Link></Button>
+              <Button asChild size="lg" className="w-full sm:w-auto"><Link href={destination}>{user ? "Lanjut ke dashboard" : "Yuk, mulai dengan Google"}<ArrowRight aria-hidden="true" /></Link></Button>
               <Button asChild size="lg" variant="outline" className="w-full sm:w-auto"><Link href="#cara-kerja">Lihat cara kerja</Link></Button>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">Tidak memerlukan koneksi rekening bank atau kredensial finansial.</p>
+            <p className="mt-4 text-xs text-muted-foreground">Tak perlu menghubungkan rekening bank. Mulai dari catatan sederhana saja.</p>
           </div>
 
           <Card className="relative overflow-hidden border-primary/15 bg-surface/90 shadow-elevated animate-fade-up [animation-delay:120ms]">
-            <div className="border-b border-border bg-primary-soft/70 p-5"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground"><WalletCards aria-hidden="true" /></span><div><p className="font-brand text-lg font-semibold">Satu ruang yang tenang</p><p className="text-xs text-muted-foreground">Untuk seluruh kebiasaan finansial Anda</p></div></div></div>
+            <div className="border-b border-border bg-primary-soft/70 p-5"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground"><WalletCards aria-hidden="true" /></span><div><p className="font-brand text-lg font-semibold">Semua catatan, satu tempat</p><p className="text-xs text-muted-foreground">Lebih mudah dirapikan, lebih enak dipahami</p></div></div></div>
             <CardContent className="space-y-3 p-5">
               {["Catat transaksi dalam alur singkat", "Pantau anggaran dari data aktual", "Ekspor laporan dan cadangan kapan saja"].map((item) => <div key={item} className="flex items-center gap-3 rounded-md border border-border bg-background/60 p-3 text-sm font-medium"><span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-income-soft text-income"><Check aria-hidden="true" className="size-4" /></span>{item}</div>)}
             </CardContent>
@@ -51,17 +51,17 @@ export default async function LandingPage() {
         </section>
 
         <section id="manfaat" className="border-y border-border bg-surface py-20 scroll-mt-20">
-          <div className="mx-auto max-w-[90rem] px-app-gutter"><div className="max-w-2xl"><p className="text-label font-semibold uppercase tracking-[0.14em] text-primary">Dibuat untuk satu orang</p><h2 className="mt-2 font-brand text-page-title font-semibold">Semua yang penting. Tidak lebih.</h2><p className="mt-3 text-muted-foreground">Fokus pada pencatatan akurat, navigasi sederhana, dan wawasan yang bisa langsung digunakan.</p></div><div className="mt-10 grid gap-4 md:grid-cols-3">{benefits.map(({ icon: Icon, title, description }) => <Card key={title}><CardContent className="p-6"><span className="mb-5 flex size-11 items-center justify-center rounded-md bg-primary-soft text-primary"><Icon aria-hidden="true" /></span><h3 className="font-brand text-xl font-semibold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p></CardContent></Card>)}</div></div>
+          <div className="mx-auto max-w-[90rem] px-app-gutter"><div className="max-w-2xl"><p className="text-label font-semibold uppercase tracking-[0.14em] text-primary">Dibuat untuk keseharian Anda</p><h2 className="mt-2 font-brand text-page-title font-semibold">Kelola keuangan tanpa terasa rumit.</h2><p className="mt-3 text-muted-foreground">Semua yang Anda perlukan untuk mencatat, memahami, dan merencanakan keuangan dengan lebih nyaman.</p></div><div className="mt-10 grid gap-4 md:grid-cols-3">{benefits.map(({ icon: Icon, title, description }) => <Card key={title}><CardContent className="p-6"><span className="mb-5 flex size-11 items-center justify-center rounded-md bg-primary-soft text-primary"><Icon aria-hidden="true" /></span><h3 className="font-brand text-xl font-semibold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p></CardContent></Card>)}</div></div>
         </section>
 
         <section id="cara-kerja" className="mx-auto max-w-[90rem] px-app-gutter py-24 scroll-mt-20">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-label font-semibold uppercase tracking-[0.14em] text-primary">Langkah Mudah</p>
+            <p className="text-label font-semibold uppercase tracking-[0.14em] text-primary">Mulai pelan-pelan</p>
             <h2 className="mt-2 font-brand text-page-title font-semibold text-navy">
-              Cara kerja My Money dalam 3 langkah sederhana.
+              Tiga langkah untuk membuat keuangan lebih rapi.
             </h2>
             <p className="mt-3 text-lead text-muted-foreground">
-              Dari autentikasi instan hingga pencatatan transaksi dan analisis grafik real-time.
+              Masuk, siapkan akun, lalu mulai mencatat. Ringkasan Anda akan ikut diperbarui.
             </p>
           </div>
 
