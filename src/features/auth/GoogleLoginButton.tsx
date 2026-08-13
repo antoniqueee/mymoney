@@ -7,7 +7,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 
-import { getApplicationOrigin, getSafeNextPath } from "./redirects";
+import { getSafeNextPath } from "./redirects";
 
 function GoogleLogo() {
   return (
@@ -33,7 +33,7 @@ export function GoogleLoginButton({ nextPath }: GoogleLoginButtonProps) {
       const supabase = createClient();
       const callbackUrl = new URL(
         "/auth/callback",
-        getApplicationOrigin(window.location.origin),
+        window.location.origin,
       );
       callbackUrl.searchParams.set("next", getSafeNextPath(nextPath));
 
