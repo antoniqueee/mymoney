@@ -6,7 +6,7 @@ import { brandConfig } from "@/config/brand";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://money.antonique.web.id"),
   title: {
     default: `${brandConfig.name} — Keuangan pribadi, lebih jernih`,
     template: `%s | ${brandConfig.name}`,
@@ -40,4 +40,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
-
