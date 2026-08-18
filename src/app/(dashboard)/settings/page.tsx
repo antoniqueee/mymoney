@@ -1,4 +1,4 @@
-import { Download, ExternalLink, LogOut, ShieldCheck, UserRound } from "lucide-react";
+import { Download, LogOut, ShieldCheck, UserRound } from "lucide-react";
 import { Alert } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -61,13 +61,10 @@ export default async function SettingsPage() {
                 <div className="flex items-start gap-3">
                   <UserRound className="mt-0.5 h-5 w-5 text-primary" aria-hidden="true" />
                   <div>
-                    <p className="text-sm font-semibold">Penghapusan akun</p>
+                    <p className="text-sm font-semibold">Kedaulatan & Penghapusan Akun</p>
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                      Unduh backup dan bersihkan lampiran pada folder pengguna di Storage terlebih dahulu. Lalu hapus pengguna melalui Auth Supabase atau hubungi pengelola deployment; data PostgreSQL terkait akan terhapus melalui cascade.
+                      Anda memiliki hak penuh atas data keuangan Anda. Pastikan Anda telah mengunduh cadangan transaksi (CSV / JSON) sebelum mengajukan penutupan akun. Seluruh catatan transaksi, riwayat dompet, dan profil akan dihapus secara menyeluruh dan permanen dari server.
                     </p>
-                    <a href="https://supabase.com/dashboard" target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 rounded-sm text-sm font-semibold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                      Buka Supabase <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                    </a>
                   </div>
                 </div>
               </div>

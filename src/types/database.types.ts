@@ -318,6 +318,10 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      ensure_current_user_finance: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
+      };
       get_account_balances: {
         Args: Record<PropertyKey, never>;
         Returns: {

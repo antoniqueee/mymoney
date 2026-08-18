@@ -1,3 +1,4 @@
+import { DashboardFooter } from "./DashboardFooter";
 import { MobileNav } from "./MobileNav";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
@@ -12,8 +13,18 @@ export function AppShell({ children, profile }: { children: React.ReactNode; pro
       >
         Lewati ke konten utama
       </a>
-      <div className="flex min-h-screen"><Sidebar /><div className="flex min-w-0 flex-1 flex-col"><Navbar profile={profile} /><main id="main-content" className="mx-auto w-full max-w-[90rem] flex-1 px-app-gutter py-section pb-24 lg:pb-section">{children}</main></div></div>
+      <div className="flex min-h-screen">
+        <Sidebar />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <Navbar profile={profile} />
+          <main id="main-content" className="mx-auto w-full max-w-[90rem] flex-1 px-app-gutter py-section pb-24 lg:pb-section">
+            {children}
+          </main>
+          <DashboardFooter />
+        </div>
+      </div>
       <MobileNav />
     </div>
   );
 }
+

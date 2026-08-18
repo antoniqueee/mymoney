@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, BarChart3, Check, LockKeyhole, ReceiptText, WalletCards } from "lucide-react";
 
 import { LogoLink } from "@/components/brand";
+import { Footer } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { brandConfig } from "@/config/brand";
@@ -66,56 +67,90 @@ export default async function LandingPage() {
           </div>
 
           <div className="mt-16 space-y-16">
-            {/* Step 1: Login & CLI/Terminal Auth */}
+            {/* Step 1: Login & Instant Financial Setup */}
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div className="space-y-4">
                 <div className="inline-flex size-10 items-center justify-center rounded-xl bg-primary-soft font-brand text-lg font-bold text-primary">
                   01
                 </div>
                 <h3 className="font-brand text-2xl font-semibold text-navy">
-                  1. Masuk & Autentikasi Instan
+                  1. Akses Aman & Personalisasi Finansial
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Cukup masuk menggunakan akun Google. Sesi Anda dilindungi oleh arsitektur autentikasi Supabase dengan kebijakan akses per pengguna (RLS), memastikan data keuangan Anda tetap pribadi.
+                  Cukup masuk menggunakan akun Google terverifikasi tanpa perlu mengingat password baru. Ruang data keuangan Anda langsung siap digunakan secara privat dengan proteksi keamanan terenkripsi dan terisolasi penuh.
                 </p>
                 <ul className="space-y-2 pt-2 text-sm font-medium text-foreground">
                   <li className="flex items-center gap-2.5">
                     <span className="flex size-5 items-center justify-center rounded-full bg-income-soft text-income">
                       <Check aria-hidden="true" className="size-3.5" />
                     </span>
-                    Tanpa perlu mendaftar ulang password
+                    Akses instan 1-klik tanpa registrasi berbelit
                   </li>
                   <li className="flex items-center gap-2.5">
                     <span className="flex size-5 items-center justify-center rounded-full bg-income-soft text-income">
                       <Check aria-hidden="true" className="size-3.5" />
                     </span>
-                    Enkripsi sesi standar industri
+                    Data keuangan 100% privat dan terisolasi milik Anda
                   </li>
                 </ul>
               </div>
 
-              {/* Terminal Window Mockup */}
+              {/* Terminal Window Mockup: Smart Workspace Setup */}
               <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950 text-slate-100 shadow-elevated">
-                <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/80 px-4 py-3">
+                <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <span className="size-3 rounded-full bg-red-500/80" />
                     <span className="size-3 rounded-full bg-yellow-500/80" />
                     <span className="size-3 rounded-full bg-green-500/80" />
                   </div>
-                  <span className="font-mono text-xs text-slate-400">my-money-cli — bash</span>
+                  <div className="flex items-center gap-1.5 font-mono text-xs text-slate-400">
+                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>my-money-engine — setup-workspace</span>
+                  </div>
                   <div className="size-4" />
                 </div>
                 <div className="p-5 font-mono text-xs leading-relaxed space-y-3">
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <span className="text-emerald-400">$</span>
-                    <span>my-money auth login --provider google</span>
+                  <div className="flex items-center gap-2 text-slate-300">
+                    <span className="font-bold text-primary">❯</span>
+                    <span>my-money init --profile <span className="text-amber-300">&quot;Personal &amp; Family Wealth&quot;</span></span>
                   </div>
-                  <div className="text-emerald-400">✔ Membuka browser untuk autentikasi Google...</div>
-                  <div className="text-slate-300">✔ Token Google OAuth2 diterima</div>
-                  <div className="text-blue-400">✔ Terhubung ke Supabase Auth (Session Active)</div>
-                  <div className="rounded bg-slate-900 p-2.5 text-slate-300 border border-slate-800/80">
-                    <span className="text-purple-400">STATUS:</span> Authenticated as <span className="text-amber-300">pengguna@gmail.com</span><br />
-                    <span className="text-purple-400">POLICY:</span> Row Level Security (RLS) Active
+                  <div className="space-y-1 text-slate-300">
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <span>✔</span>
+                      <span>Ruang Finansial Pribadi aktif (Mata Uang: IDR • Zona: WIB)</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <span>✔</span>
+                      <span>3 Pos Dompet Siap: [BCA Utama] [E-Wallet Harian] [Dana Darurat]</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-cyan-400">
+                      <span>✔</span>
+                      <span>Sistem Alokasi Anggaran 50/30/20 diaktifkan otomatis</span>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-slate-800 bg-slate-900/80 p-3 text-slate-300 space-y-1.5 shadow-inner">
+                    <div className="flex items-center justify-between border-b border-slate-800 pb-1.5 text-[0.7rem] font-semibold tracking-wider text-slate-400 uppercase">
+                      <span>STATUS KESIAPAN FINANSIAL</span>
+                      <span className="text-emerald-400">SIAP DIGUNAKAN</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 pt-1 text-[0.7rem]">
+                      <div>
+                        <span className="text-slate-500">Proteksi Data:</span>{" "}
+                        <span className="font-medium text-emerald-300">Terkunci &amp; Privat</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500">Target Anggaran:</span>{" "}
+                        <span className="font-medium text-cyan-300">6 Kategori Aktif</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500">Akses Rekening:</span>{" "}
+                        <span className="font-medium text-amber-300">Zero-Credential</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500">Laporan Otomatis:</span>{" "}
+                        <span className="font-medium text-purple-300">Real-time Ready</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -181,17 +216,17 @@ export default async function LandingPage() {
               </div>
             </div>
 
-            {/* Step 3: Fast Transaction Recording & Terminal Analytics Stream */}
+            {/* Step 3: Fast Transaction Recording & Financial Health Stream */}
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div className="space-y-4">
                 <div className="inline-flex size-10 items-center justify-center rounded-xl bg-primary-soft font-brand text-lg font-bold text-primary">
                   03
                 </div>
                 <h3 className="font-brand text-2xl font-semibold text-navy">
-                  3. Catat Transaksi & Lihat Grafik Realtime
+                  3. Catat Transaksi & Analisis Cerdas Realtime
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Tambahkan transaksi pengeluaran atau pemasukan hanya dalam beberapa detik. Seluruh laporan, tren bulanan, dan perbandingan arus kas langsung ter-update secara otomatis.
+                  Tambahkan transaksi pengeluaran atau pemasukan hanya dalam beberapa detik. Seluruh laporan, tren arus kas, sisa anggaran, dan kalkulasi surplus langsung dihitung secara otomatis.
                 </p>
                 <div className="pt-2">
                   <Button asChild size="lg">
@@ -203,31 +238,52 @@ export default async function LandingPage() {
                 </div>
               </div>
 
-              {/* Live Transaction Stream Terminal */}
+              {/* Live Financial Health & Transaction Stream Terminal */}
               <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950 text-slate-100 shadow-elevated">
-                <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/80 px-4 py-3">
+                <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <span className="size-3 rounded-full bg-red-500/80" />
                     <span className="size-3 rounded-full bg-yellow-500/80" />
                     <span className="size-3 rounded-full bg-green-500/80" />
                   </div>
-                  <span className="font-mono text-xs text-slate-400">transaction-stream.log</span>
+                  <div className="flex items-center gap-1.5 font-mono text-xs text-slate-400">
+                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>my-money-intelligence — live-analytics &amp; audit</span>
+                  </div>
                   <div className="size-4" />
                 </div>
-                <div className="p-5 font-mono text-xs leading-relaxed space-y-3">
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <span className="text-emerald-400">$</span>
-                    <span>my-money tx add --type expense --amount 45000 --cat "Kopi & Makan"</span>
+                <div className="p-5 font-mono text-xs leading-relaxed space-y-3.5">
+                  <div>
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <span className="font-bold text-primary">❯</span>
+                      <span>my-money record --expense <span className="text-amber-300">&quot;Belanja Bulanan Supermarket&quot;</span> --amount <span className="text-emerald-300">450.000</span> --wallet <span className="text-cyan-300">&quot;GoPay&quot;</span></span>
+                    </div>
+                    <div className="mt-1.5 space-y-1 text-slate-300">
+                      <div className="text-emerald-400">✔ Pengeluaran Rp 450.000 berhasil dicatat di pos &apos;Kebutuhan Pokok&apos;</div>
+                      <div className="text-slate-400">ℹ Sisa Anggaran Bulanan: <span className="font-semibold text-emerald-300">Rp 2.550.000</span> (Aman • 64% tersisa)</div>
+                    </div>
                   </div>
-                  <div className="text-emerald-400">✔ Transaksi berhasil disimpan ke PostgreSQL</div>
-                  <div className="text-blue-400">ℹ [EVENT] Arus Kas Realtime diperbarui</div>
-                  <div className="rounded border border-emerald-500/30 bg-emerald-950/40 p-3 text-emerald-300 space-y-1">
-                    <div className="font-bold">+ RECENT TRANSACTION</div>
-                    <div>Jenis: Pengeluaran | Kategori: Makanan & Minuman</div>
-                    <div>Jumlah: Rp 45.000 | Akun: GoPay</div>
-                  </div>
-                  <div className="text-slate-400">
-                    <span className="text-amber-400">⚡ SUMMARY:</span> Pemasukan Rp 8.500.000 | Pengeluaran Rp 3.245.000 | Arus Kas Net +Rp 5.255.000
+
+                  <div className="border-t border-slate-800/80 pt-2.5">
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <span className="font-bold text-primary">❯</span>
+                      <span>my-money audit --health-score --period <span className="text-purple-300">&quot;Bulan Ini&quot;</span></span>
+                    </div>
+                    <div className="mt-2 space-y-2 rounded-lg border border-emerald-500/30 bg-emerald-950/30 p-3 text-slate-200">
+                      <div className="flex items-center justify-between text-xs font-bold text-emerald-300">
+                        <span>📊 FINANCIAL HEALTH SCORE: 94 / 100</span>
+                        <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[0.65rem] uppercase text-emerald-300">Kondisi Prima</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[0.7rem] text-slate-300">
+                        <div>• Total Pemasukan: <span className="font-semibold text-emerald-400">Rp 12.500.000</span></div>
+                        <div>• Total Belanja: <span className="font-semibold text-rose-400">Rp 4.850.000</span></div>
+                        <div>• Rasio Pengeluaran: <span className="font-semibold text-cyan-300">38.8% (Terkendali)</span></div>
+                        <div>• Surplus Bersih: <span className="font-bold text-emerald-300">+Rp 7.650.000</span></div>
+                      </div>
+                      <div className="border-t border-emerald-500/20 pt-1.5 text-[0.6875rem] text-amber-300">
+                        ⚡ <strong>Saran Cerdas:</strong> Surplus dapat dialokasikan 50% ke &apos;Pos Tabungan &amp; Investasi&apos;.
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -236,7 +292,7 @@ export default async function LandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-border bg-surface"><div className="mx-auto flex max-w-[90rem] flex-col gap-3 px-app-gutter py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><LogoLink size="sm" /><p>© {new Date().getFullYear()} {brandConfig.name}. {brandConfig.copyrightNotice}</p></div></footer>
+      <Footer />
     </div>
   );
 }

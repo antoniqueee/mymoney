@@ -30,27 +30,73 @@ interface TransactionOptionsQuery {
   };
 }
 
+async function loadTransactionOptions(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  userId: string,
+) {
+  const [categoryResult, accountResult, profileResult] = await Promise.all([
+    supabase
+      .from("categories")
+      .select("id,name,type,color,icon,is_archived")
+      .eq("user_id", userId)
+      .order("is_archived")
+      .order("type")
+      .order("name"),
+    supabase
+      .from("accounts")
+      .select("id,name,type,is_archived")
+      .eq("user_id", userId)
+      .order("is_archived")
+      .order("name"),
+    supabase
+      .from("profiles")
+      .select("currency_code")
+      .eq("id", userId)
+      .maybeSingle(),
+  ]);
+
+  return { categoryResult, accountResult, profileResult };
+}
+
 export async function getTransactionOptions(options: TransactionOptionsQuery = {}) {
   const supabase = await createClient();
-  const [
-    { data: categories, error: categoryError },
-    { data: accounts, error: accountError },
-    { data: profile, error: profileError },
-  ] =
-    await Promise.all([
-      supabase
-        .from("categories")
-        .select("id,name,type,color,icon,is_archived")
-        .order("is_archived")
-        .order("type")
-        .order("name"),
-      supabase
-        .from("accounts")
-        .select("id,name,type,is_archived")
-        .order("is_archived")
-        .order("name"),
-      supabase.from("profiles").select("currency_code").maybeSingle(),
-    ]);
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return {
+      categories: [],
+      accounts: [],
+      currencyCode: brandConfig.defaultCurrency,
+      error: "Sesi Anda telah berakhir. Silakan masuk kembali.",
+    };
+  }
+
+  let results = await loadTransactionOptions(supabase, user.id);
+  let setupError: string | null = null;
+
+  const financeSetupIsMissing =
+    !results.categoryResult.error &&
+    !results.accountResult.error &&
+    !results.profileResult.error &&
+    (results.categoryResult.data?.length === 0 ||
+      results.accountResult.data?.length === 0 ||
+      !results.profileResult.data);
+
+  if (financeSetupIsMissing) {
+    const { error } = await supabase.rpc("ensure_current_user_finance");
+    setupError = error?.message ?? null;
+
+    if (!error) {
+      results = await loadTransactionOptions(supabase, user.id);
+    }
+  }
+
+  const { data: categories, error: categoryError } = results.categoryResult;
+  const { data: accounts, error: accountError } = results.accountResult;
+  const { data: profile, error: profileError } = results.profileResult;
 
   const visibleCategories = options.includeArchived
     ? categories ?? []
@@ -74,6 +120,9 @@ export async function getTransactionOptions(options: TransactionOptionsQuery = {
       categoryError?.message ??
       accountError?.message ??
       profileError?.message ??
+      (setupError
+        ? "Data awal akun dan kategori belum dapat disiapkan. Pastikan migration database terbaru sudah diterapkan."
+        : null) ??
       null,
   };
 }
